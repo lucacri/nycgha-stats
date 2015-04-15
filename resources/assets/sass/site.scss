@@ -1,0 +1,19 @@
+$icon-font-path: '/fonts/';
+$fa-font-path: '/fonts';
+
+@import url("http://fonts.googleapis.com/css?family=Lato:400,900,700,300");
+
+// Importing other sass files //
+@import "../bower_components/fontawesome/scss/font-awesome";
+$baseFontFamily: 'FontAwesome';
+@import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import "otherCss";
+
+
+div.team > div{
+	height: 285px;
+}
+div.team > div:nth-child(3n){
+	margin-right: 0px;
+}

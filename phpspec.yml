@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Stats
+        psr4_prefix: Stats
+        src_path: app
