@@ -28,6 +28,15 @@ class Team extends Model
 		return $this->hasMany(Roster::class);
 	}
 
+	public function games() {
+		return $this->hasMany(Game::class, 'ghateam_id');
+	}
+
+	public function seasons() {
+		$seasons = array_unique($this->games()->lists('season_id'));
+		return Season::whereIn('season_id', $seasons)->get();
+	}
+
 	public function scopeActive($q) {
 		return $q->where('active', 1);
 	}

@@ -12,8 +12,8 @@
         <thead>
             <tr>
                 <th>Date</th>
-                <th>Home Team</th>
-                <th>Away Team</th>
+                <th>GHA Team</th>
+                <th>Other Team</th>
                 <th>Goals Against</th>
                 <th>Overtime</th>
                 <th>Playoff</th>

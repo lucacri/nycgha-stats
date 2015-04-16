@@ -3,7 +3,7 @@
 @section('admincontent')
     <div class="row">
         <div class="col-md-12">
-            <h2>Game score</h2>
+            <h2>Update scores for {{ $team->teamname }}</h2>
         </div>
     </div>
 
@@ -19,11 +19,15 @@
             </div>
             <div class="form-group">
                 <label>Game</label>
-                <select name="game" id="game" class="form-control">
-                    @foreach($games as $gameItem)
-                        <option value="{{$gameItem->game_id}}" {{ ($game  && $gameItem->game_id == $game->game_id? "selected=selected" : '') }}>{{$gameItem->datetime}}</option>
-                    @endforeach
-                </select>
+                @if(count($games) == 0)
+                    <b class="text-warning">No games for this season</b>
+                @else
+                    <select name="game" id="game" class="form-control">
+                        @foreach($games as $gameItem)
+                            <option value="{{$gameItem->game_id}}" {{ ($game  && $gameItem->game_id == $game->game_id? "selected=selected" : '') }}>{{$gameItem->datetime}} vs {{$gameItem->otherTeam->teamname}}</option>
+                        @endforeach
+                    </select>
+                @endif
             </div>
         </div>
     </div>

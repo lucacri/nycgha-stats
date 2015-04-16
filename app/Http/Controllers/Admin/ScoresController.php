@@ -26,7 +26,10 @@ class ScoresController extends Controller
 	}
 
 	public function index(Request $request) {
-		$seasons = Season::orderBy('season_id', 'desc')->get();
+		$team = $this->auth->user()->managedTeam;
+
+
+		$seasons = $team->seasons()->sortByDesc('season_id');
 		if ($request->has('season_id')) {
 			$season = Season::findOrFail($request->get('season_id'));
 		} else {
@@ -51,7 +54,7 @@ class ScoresController extends Controller
 					 ->orderBy('datetime', 'desc')
 					 ->get();
 
-		$team = $this->auth->user()->managedTeam;
+
 
 		$roster = $team->roster()->with('playerRole', 'person')->get()->sortBy('person.fname');
 

@@ -3,8 +3,8 @@
 @section('admincontent')
     <H1>Create a new game</H1>
     {!! Former::open()->route('admin.game.store') !!}
-    {!! Former::select('ghateam_id')->label('Home Team')->fromQuery(Stats\Team::orderBy('teamname')->get(), 'teamname', 'team_id') !!}
-    {!! Former::select('otherteam_id')->label('Away Team')->fromQuery(Stats\Team::orderBy('teamname')->get(), 'teamname', 'team_id') !!}
+    {!! Former::select('ghateam_id')->label('GHA Team')->fromQuery(Stats\Team::orderBy('teamname')->get(), 'teamname', 'team_id') !!}
+    {!! Former::select('otherteam_id')->label('Other Team')->fromQuery(Stats\Team::orderBy('teamname')->get(), 'teamname', 'team_id') !!}
     {!! Former::input('datetime')->label("Game Time") !!}
     {!! Former::input('goalsagainst') !!}
     {!! Former::select('overtimestatus')->label('Overtime')->options(['' => 'No', 'OT' => "Overtime", "SO" => "Shoot-outs"]) !!}

@@ -3,8 +3,8 @@
 @section('admincontent')
     <H1>Edit game</H1>
    {!! Former::open()->route('admin.game.update', [$game])->populate($game) !!}
-   {!! Former::select('ghateam_id')->label('Home Team')->fromQuery(Stats\Team::orderBy('teamname')->get(), 'teamname', 'team_id') !!}
-   {!! Former::select('otherteam_id')->label('Away Team')->fromQuery(Stats\Team::orderBy('teamname')->get(), 'teamname', 'team_id') !!}
+   {!! Former::select('ghateam_id')->label('GHA Team')->fromQuery(Stats\Team::orderBy('teamname')->get(), 'teamname', 'team_id') !!}
+   {!! Former::select('otherteam_id')->label('Other Team')->fromQuery(Stats\Team::orderBy('teamname')->get(), 'teamname', 'team_id') !!}
    {!! Former::input('datetime')->label("Game Time") !!}
 
    {!! Former::input('goalsagainst') !!}
