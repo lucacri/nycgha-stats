@@ -208,9 +208,14 @@
     <style>
         div.team > div{
             height: 285px;
+            padding-bottom: 20px;
         }
         div.team > div:nth-child(3n){
             margin-right: 0px;
+        }
+        
+        div.team img{
+            max-height: 200px;
         }
     </style>
 
