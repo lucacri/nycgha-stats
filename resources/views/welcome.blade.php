@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('pageTitle', 'Teams')
 @section('content')
 
     <div class="et_pb_row team">
