@@ -56,8 +56,11 @@ class ScoresController extends Controller
 					 ->get();
 
 
-
-		$roster = $team->roster()->with('playerRole', 'person')->get()->sortBy('person.fname');
+		$roster = $team->roster()
+					   ->with('playerRole', 'person')
+					   ->where('season_id', $season->season_id)
+					   ->get()
+					   ->sortBy('person.fname');
 
 		$players = $this->getPlayersWithStats($game, $roster);
 
