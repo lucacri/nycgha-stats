@@ -25,9 +25,9 @@ Route::group(['prefix' => 'admin', 'namespace' => "Admin", 'before' => 'auth'],
 		Route::get('/', 'AdminController@index');
 		Route::get('scores', ['as' => 'admin.scores.index', 'uses' => "ScoresController@index"]);
 		Route::post('scores/season/{season}/game/{game}',
-				   ['uses' => 'ScoresController@update', 'as' => 'admin.scores.update']);
+					['uses' => 'ScoresController@update', 'as' => 'admin.scores.update']);
 
-		Route::group(['namespace' => 'Godmode', 'before' => 'auth.god'],
+		Route::group(['namespace' => 'Godmode', 'before' => ['auth', 'auth.god']],
 			function () {
 				Route::resource('user', 'UsersController');
 				Route::resource('person', 'PersonController');
