@@ -30,10 +30,11 @@ class ScoresController extends Controller
 
 
 		$seasons = $team->seasons()->sortByDesc('season_id');
+
 		if ($request->has('season_id')) {
 			$season = Season::findOrFail($request->get('season_id'));
 		} else {
-			$season = Season::orderBy('season_id', 'desc')->first();
+			$season = $seasons[0];
 		}
 
 		if ($request->has('game_id')) {
@@ -41,7 +42,7 @@ class ScoresController extends Controller
 						->where('game_id', $request->get('game_id'))
 						->firstOrFail();
 		} else {
-			$game = Game::where('ghateam_id', $this->auth->user()->manages_team_id)
+			$game = Game::where('ghateam_id', $team->team_id)
 						->where('season_id', $season->season_id)
 						->where('datetime', '<', Carbon::now())
 						->orderBy('datetime', 'desc')
@@ -49,7 +50,7 @@ class ScoresController extends Controller
 		}
 
 		$games = Game::where('datetime', '<', Carbon::now())
-					 ->where('ghateam_id', $this->auth->user()->manages_team_id)
+					 ->where('ghateam_id', $team->team_id)
 					 ->where('season_id', $season->season_id)
 					 ->orderBy('datetime', 'desc')
 					 ->get();
