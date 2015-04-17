@@ -90,7 +90,6 @@ class ScoresController extends Controller
 		foreach ($request->get('player') as $roster_id => $roster) {
 			$stat = PlayerStat::where('game_id', $game->game_id)->where('roster_id', $roster_id)->first();
 			$this->updateStat($game, $stat, $roster_id, $roster);
-
 		}
 		\Flash::success("Game information updated");
 
@@ -115,12 +114,14 @@ class ScoresController extends Controller
 	 * @param      $roster
 	 */
 	private function updateStat(Game $game, $stat, $roster_id, $roster) {
-
 		if ($stat && !isset($roster['played'])) {
+			// the player has already a stat but he is stet as not player
 			$stat->delete();
 
 			return;
 		}
+		// If the player didnt, play, do nothing
+		if (!isset($roster['played'])) return;
 
 		if (!$stat) {
 			$stat = new PlayerStat();
