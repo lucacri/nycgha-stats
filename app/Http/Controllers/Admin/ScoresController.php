@@ -31,10 +31,11 @@ class ScoresController extends Controller
 
 		$seasons = $team->seasons()->sortByDesc('season_id');
 
+
 		if ($request->has('season_id')) {
 			$season = Season::findOrFail($request->get('season_id'));
 		} else {
-			$season = $seasons[0];
+			$season = $seasons->first();
 		}
 
 		if ($request->has('game_id')) {
