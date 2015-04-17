@@ -1,15 +1,22 @@
 @extends('admin.master')
 
 @section('admincontent')
-    <H1>Create user</H1>
-    {!! Former::open()->route('admin.user.store') !!}
-    {!! Former::input('name') !!}
-    {!! Former::input('email') !!}
-    {!! Former::password('password')->value(NULL) !!}
-    {!! Former::password('password_confirmation') !!}
-    {!! Former::checkbox('admin')->help("Is this user an admin?") !!}
-    {!! Former::select('manages_team_id')->label("Team managed")->fromQuery(Stats\Team::active()->get(), 'teamname', 'team_id') !!}
-    {!! Former::actions()->large_primary_submit('Submit')->large_inverse_reset('Reset') !!}
+    <H1>Create a new person</H1>
+    {!! Former::open()->route('admin.person.store') !!}
+    {!! Former::input('fname')->label('First name') !!}
+    {!! Former::input('lname')->label('Last name') !!}
+    {!! Former::input('phone_home') !!}
+    {!! Former::input('phone_work') !!}
+    {!! Former::input('phone_mobile') !!}
+    {!! Former::input('address1') !!}
+    {!! Former::input('address2') !!}
+    {!! Former::input('city') !!}
+    {!! Former::input('state') !!}
+    {!! Former::input('postalcode')->label("ZIP Code") !!}
+    {!! Former::input('country') !!}
+    {!! Former::input('gender')->help("Gender (M or F)") !!}
+    {!! Former::input('birthdate')->help("Format: YYYY-MM-DD. Ex: 1984-01-17") !!}
 
+    {!! Former::actions()->large_primary_submit('Submit')->large_inverse_reset('Reset') !!}
     {!! Former::close() !!}
 @stop

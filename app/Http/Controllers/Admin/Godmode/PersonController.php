@@ -2,6 +2,7 @@
 
 use Stats\Http\Requests;
 use Illuminate\Http\Request;
+use Stats\Http\Requests\CreatePersonRequest;
 use Stats\Person;
 
 class PersonController extends Controller
@@ -17,6 +18,23 @@ class PersonController extends Controller
 															->orderBy('lname', 'asc')
 															->paginate(25));
 	}
+
+	public function create() {
+		return view('admin.person.create');
+	}
+
+	/**
+	 * @param CreatePersonRequest $request
+	 * @return \Illuminate\View\View
+	 */
+	public function store(CreatePersonRequest $request) {
+		$person = Person::create($request->all());
+
+		\Flash::success("Person created");
+
+		return redirect()->route('admin.person.index');
+	}
+
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -42,7 +60,6 @@ class PersonController extends Controller
 
 		return redirect()->route('admin.person.edit', [$person]);
 	}
-
 
 
 }

@@ -24,6 +24,10 @@ class Person extends Model
 		'birthdate',
 	];
 
+	public function getDates() {
+		return ['birthdate'];
+	}
+
 	public function emails() {
 		return $this->hasMany(PersonEmail::class);
 	}
