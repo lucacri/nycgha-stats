@@ -9,6 +9,10 @@ class Team extends Model
 	public $timestamps = FALSE;
 
 	public $fillable = ['teamname', 'location', 'division', 'active', 'description', 'logo_url'];
+	protected $casts = [
+		'active' => 'boolean',
+	];
+
 
 	public function url() {
 		return \URL::route('team', [str_slug($this->teamname, '-')]);

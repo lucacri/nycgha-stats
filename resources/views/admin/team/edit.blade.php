@@ -7,7 +7,7 @@
    {!! Former::input('division')->label('Division') !!}
    {!! Former::input('logo_url') !!}
    {!! Former::textarea('description') !!}
-   {!! Former::checkbox('active') !!}
+   {!! Former::checkbox('active')->value(1) !!}
 
    {!! Former::actions()->large_primary_submit('Submit')->large_inverse_reset('Reset') !!}
    {!! Former::close() !!}
