@@ -4,6 +4,7 @@ use Stats\Game;
 use Stats\Http\Requests;
 
 use Illuminate\Http\Request;
+use Stats\Season;
 
 class GameController extends Controller
 {
@@ -25,7 +26,7 @@ class GameController extends Controller
 	 * @return Response
 	 */
 	public function create() {
-		return view('admin.game.create');
+		return view('admin.game.create')->withSeasons($this->makeSeasonsArray());
 	}
 
 	/**
@@ -57,7 +58,7 @@ class GameController extends Controller
 	 * @return Response
 	 */
 	public function edit(Game $game) {
-		return view('admin.game.edit')->withGame($game);
+		return view('admin.game.edit')->withGame($game)->withSeasons($this->makeSeasonsArray());
 	}
 
 	/**
@@ -83,6 +84,20 @@ class GameController extends Controller
 	 */
 	public function destroy($id) {
 		//
+	}
+
+	/**
+	 * @return array
+	 */
+	private function makeSeasonsArray() {
+
+		$seasons = [];
+
+		foreach (Season::orderBy('season_id', 'desc')->get() as $season_now) {
+			$seasons[$season_now->season_id] = $season_now->year . " " . $season_now->season;
+		}
+
+		return $seasons;
 	}
 
 }

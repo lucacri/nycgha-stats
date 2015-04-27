@@ -5,6 +5,7 @@
    {!! Former::open()->route('admin.game.update', [$game])->populate($game) !!}
    {!! Former::select('ghateam_id')->label('GHA Team')->fromQuery(Stats\Team::orderBy('teamname')->get(), 'teamname', 'team_id') !!}
    {!! Former::select('otherteam_id')->label('Other Team')->fromQuery(Stats\Team::orderBy('teamname')->get(), 'teamname', 'team_id') !!}
+    {!! Former::select('season_id')->label('season')->options($seasons) !!}
    {!! Former::input('datetime')->label("Game Time") !!}
 
    {!! Former::input('goalsagainst') !!}

@@ -10,20 +10,22 @@
     </div>
     <table class="table">
         <thead>
-            <tr>
-                <th>Date</th>
-                <th>GHA Team</th>
-                <th>Other Team</th>
-                <th>Goals Against</th>
-                <th>Overtime</th>
-                <th>Playoff</th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>Date</th>
+            <th>Season</th>
+            <th>GHA Team</th>
+            <th>Other Team</th>
+            <th>Goals Against</th>
+            <th>Overtime</th>
+            <th>Playoff</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
         @foreach($games as $game)
             <tr>
                 <td>{{ $game->datetime }}</td>
+                <td>{{ $game->season->season }} {{$game->season->year}}</td>
                 <td>{{ $game->ghaTeam->teamname}}</td>
                 <td>{{ $game->otherTeam->teamname}}</td>
                 <td>{{ $game->goalsagainst}}</td>

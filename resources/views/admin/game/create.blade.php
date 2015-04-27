@@ -5,10 +5,12 @@
     {!! Former::open()->route('admin.game.store') !!}
     {!! Former::select('ghateam_id')->label('GHA Team')->fromQuery(Stats\Team::orderBy('teamname')->get(), 'teamname', 'team_id') !!}
     {!! Former::select('otherteam_id')->label('Other Team')->fromQuery(Stats\Team::orderBy('teamname')->get(), 'teamname', 'team_id') !!}
+    {!! Former::select('season_id')->label('season')->options($seasons) !!}
     {!! Former::input('datetime')->label("Game Time") !!}
     {!! Former::input('goalsagainst') !!}
     {!! Former::select('overtimestatus')->label('Overtime')->options(['' => 'No', 'OT' => "Overtime", "SO" => "Shoot-outs"]) !!}
     {!! Former::input('playoffflag') !!}
+
 
     {!! Former::actions()->large_primary_submit('Submit')->large_inverse_reset('Reset') !!}
     {!! Former::close() !!}
