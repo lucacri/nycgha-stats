@@ -91,6 +91,9 @@ class ScoresController extends Controller
 			$stat = PlayerStat::where('game_id', $game->game_id)->where('roster_id', $roster_id)->first();
 			$this->updateStat($game, $stat, $roster_id, $roster);
 		}
+
+		$this->updateGoalieStats($request, $game);
+
 		\Flash::success("Game information updated");
 
 		return redirect()->route('admin.scores.index',
@@ -115,12 +118,12 @@ class ScoresController extends Controller
 	 */
 	private function updateStat(Game $game, $stat, $roster_id, $roster) {
 		if ($stat && !isset($roster['played'])) {
-			// the player has already a stat but he is stet as not player
+			// the player has already a stat but he is set as not player
 			$stat->delete();
 
 			return;
 		}
-		// If the player didnt, play, do nothing
+		// If the player didn't play, do nothing
 		if (!isset($roster['played'])) return;
 
 		if (!$stat) {
@@ -155,6 +158,24 @@ class ScoresController extends Controller
 		}
 
 		return $players;
+	}
+
+	/**
+	 * @param UpdateScoresRequest $request
+	 * @param Game                $game
+	 * @return void
+	 */
+	private function updateGoalieStats(UpdateScoresRequest $request, Game $game) {
+		$playedGoalie = $request->get('goalie')['played'];
+		foreach ($request->get('goalie') as $roster_id => $roster) {
+			if ($roster_id !== 'played') {
+				$stat = PlayerStat::where('game_id', $game->game_id)->where('roster_id', $roster_id)->first();
+				if ($playedGoalie == $roster_id) {
+					$roster['played'] = TRUE;
+				}
+				$this->updateStat($game, $stat, $roster_id, $roster);
+			}
+		}
 	}
 
 }

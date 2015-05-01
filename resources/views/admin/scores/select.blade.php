@@ -55,14 +55,45 @@
 
                 <tbody>
                     @foreach($players as $player)
+                        @if($player->isGoalie() == false)
                         <tr>
                             <td>{{ $player->person->fullname }}</td>
                             <td><input type="checkbox" name="player[{{$player->roster_id}}][played]" value="true" {{ ($player->stat !== null ? 'checked' : "") }}></td>
-                            <td><input type="number" class="form-control" min="0" name="player[{{$player->roster_id}}][goals]" value="{{ ($player->stat == null ? '0' : intval($player->stat->goals))}}"/></td>
+                            <td><input type="number" class="form-control" min="0" name="player[{{$player->roster_id}}][goals]" value="{{ ($player->stat == NULL ? '0' : intval($player->stat->goals))}}"/></td>
                             <td><input type="number" class="form-control" min="0" name="player[{{$player->roster_id}}][assists]" value="{{ ($player->stat == null ? '0' : intval($player->stat->assists))}}"/></td>
                             <td><input type="number" class="form-control" min="0" name="player[{{$player->roster_id}}][penaltyminutes]" value="{{ ($player->stat == null ? '0' : intval($player->stat->penaltyminutes))}}"/></td>
                         </tr>
+                        @endif
                     @endforeach
+                </tbody>
+            </table>
+
+            <hr/>
+            <h2>Goalies</h2>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Played</th>
+                    <th>Goals</th>
+                    <th>Assists</th>
+                    <th>PIM</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach($players as $player)
+                    @if($player->isGoalie() == true)
+                        <tr>
+                            <td>{{ $player->person->fullname }}</td>
+                            <td><input type="radio" name="goalie[played]" value="{{$player->roster_id}}" {{ ($player->stat !== null ? 'checked' : "") }}></td>
+                            <td><input type="number" class="form-control" min="0" name="goalie[{{$player->roster_id}}][goals]" value="{{ ($player->stat == NULL ? '0' : intval($player->stat->goals))}}"/></td>
+                            <td><input type="number" class="form-control" min="0" name="goalie[{{$player->roster_id}}][assists]" value="{{ ($player->stat == null ? '0' : intval($player->stat->assists))}}"/></td>
+                            <td><input type="number" class="form-control" min="0" name="goalie[{{$player->roster_id}}][penaltyminutes]" value="{{ ($player->stat == null ? '0' : intval($player->stat->penaltyminutes))}}"/></td>
+                        </tr>
+                    @endif
+                @endforeach
                 </tbody>
             </table>
 

@@ -17,6 +17,10 @@ class Roster extends Model
 		'leader'
 	];
 
+	public function isGoalie() {
+		return $this->playerRole->role == 'Goalie';
+	}
+
 	public function person() {
 		return $this->belongsTo(Person::class, 'main_id');
 	}
