@@ -30,6 +30,7 @@ Route::group(['prefix' => 'admin', 'namespace' => "Admin", 'before' => 'auth'],
 		Route::group(['namespace' => 'Godmode', 'before' => ['auth', 'auth.god']],
 			function () {
 				Route::resource('user', 'UsersController');
+				Route::get('user/{user}/loginAs', ['as' => 'user.loginAs', 'uses' => "UsersController@loginAs"]);
 				Route::resource('person', 'PersonController');
 				Route::resource('team', 'TeamController');
 				Route::resource('game', 'GameController');

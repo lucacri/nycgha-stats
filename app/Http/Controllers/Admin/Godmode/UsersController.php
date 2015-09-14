@@ -77,5 +77,10 @@ class UsersController extends Controller
 		return redirect()->route('admin.user.index');
 	}
 
+	public function loginAs(User $user) {
+		auth()->login($user);
+
+		return redirect()->action('WelcomeController@index');
+	}
 
 }
